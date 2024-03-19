@@ -325,7 +325,9 @@
 
 
     <!-- Modal Cart -->
-    <div class="bg-black/50 w-full h-full fixed top-0 left-0 z-[99]  items-center justify-center hidden" >
+    <div class="bg-black/50 w-full h-full fixed top-0 left-0 z-[99]  items-center justify-center flex-col hidden" 
+    id="cart-modal"
+    >
 
       <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]" >
         <h2 class="text-center font-bold text-2xl mb-2" >Meu Carrinho</h2>
@@ -342,19 +344,22 @@
         id="address"
         class="w-full border-2 p-1 rounded my-1 "
         />
-      </div>
 
-      <p class="text-red-600 hidden " id="address-warn" >Digite seu endereço completo</p>
+        <p class="text-red-600 hidden " id="address-warn" >Digite seu endereço completo</p>
 
       <div class="flex items-center justify-between mt-5 w-full" >
-        <button  id="close-model-btn" >Fechar</button>
-        <button id="checkout-btn" class="bg-green-500 text-white px-4 py-1" >Finalizar pedido</button>
+        <button  id="close-model-btn " >Fechar</button>
+        <button id="checkout-btn" class="bg-green-500 text-white px-1 py-1" >Finalizar pedido</button>
       </div>
+
+      </div>
+
+      
 
     </div>
     <!-- Fim Modal Cart -->
 
-    <footer class="w-full bg-red-600 py-2 fixed bottom-0 z-40 flex items-center justify-center " >
+    <footer class="w-full bg-red-600 py-0 fixed bottom-0 z-40 flex items-center justify-center " >
         <button class="flex items-center gap-2 text-white font-bold" id="cart-btn" >
             (<span id="cart-count" >0</span>)
             Veja meu carrinho
@@ -363,4 +368,5 @@
     </footer>
 
   </body>
+  <script src="./script.js"></script>
 </html>
