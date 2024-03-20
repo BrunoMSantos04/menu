@@ -11,6 +11,18 @@ const addressWarn = document.getElementById("address-warn")
 
 let cart = [];
 
+
+const spanItem = document.getElementById("date-span")
+const isOpen = checkRestaurantOpen()
+
+if (isOpen) {
+    spanItem.classList.remove("bg-red-500")
+    spanItem.classList.add("bg-green-600")
+}else{
+    spanItem.classList.add("bg-red-500")
+    spanItem.classList.remove("bg-green-600")
+}
+
 //abrir o modal
 cartBtn.addEventListener('click', function() {
     modal.style.display = "flex"
@@ -138,6 +150,22 @@ address.addEventListener("input", function(event) {
 
 //finalizar o carrinho
 checkOutBtn.addEventListener("click", function () {
+
+    const isOpen = checkRestaurantOpen()
+    if (!isOpen) {
+        Toastify({
+            text: "Ops Restaurante Fechado!",
+            duration: 3000,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "left", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "#ef4444",
+            },
+            onClick: function(){} // Callback after click
+          }).showToast();
+    }
     if (cart.length === 0) {
         return;
     }
@@ -147,4 +175,27 @@ checkOutBtn.addEventListener("click", function () {
         address.classList.add("border-red-500")
         return
     }
+
+    const cartItems = cart.map((item) => {
+        return(
+            ` ${item.name} Quantidade: ${item.quantity} Preço: ${item.price} |`
+        )
+    }).join("")
+
+    const message = encodeURIComponent(cartItems)
+    const phone = '16996368807'
+
+    window.open(`https://wa.me/${phone}?text=${message} Endereço: ${address.value}`, "_blank")
+
+    cart.length = 0;
+    updateModal()
 })
+
+
+function checkRestaurantOpen(){
+    const data = new Date()
+    const hora = data.getHours()
+    return hora >= 18 && hora < 22
+
+}
+
